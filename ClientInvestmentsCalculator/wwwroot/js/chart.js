@@ -1,4 +1,4 @@
-﻿var Chart = function () {
+﻿$().ready(function () {
     var self = this;
 
     self.getParameters = function () {
@@ -34,7 +34,7 @@
         return dataTable;
     };
 
-    self.drawChart = function (data) {        
+    self.drawChart = function (data) {
         var dataTable = self.createDataTable(data);
         var data = google.visualization.arrayToDataTable(dataTable);
 
@@ -47,14 +47,19 @@
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
-    }
+    }    
 
     self.initialise = function () {
         $("#drawButton").click(function () {
-            self.getProjectionFigures();
+            var form = $('#investmentForm');
+            $.validator.unobtrusive.parse(form);
+                       
+            if (form.validate().form()) {
+               self.getProjectionFigures();
+            }
         });
     };
 
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(self.initialise);
-}();
+});

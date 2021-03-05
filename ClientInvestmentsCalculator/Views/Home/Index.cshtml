@@ -1,52 +1,63 @@
-﻿@{
+﻿@model InvestmentProjectionViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="~/js/chart.js" asp-append-version="true"></script>
 
-<form>
+@section Scripts{  
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/js/chart.js" asp-append-version="true"></script>
+}
+
+<form name="investmentForm" id="investmentForm">
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label for="">Lump Sum Investment (£)</label>
-                <input type="number" class="form-control" id="lumpSumInvestment" placeholder="e.g. 1000">
+                <label asp-for="LumpSumInvestment"></label>
+                <input type="number" class="form-control" id="lumpSumInvestment" placeholder="e.g. 1000" asp-for="LumpSumInvestment">
                 <small id="lumpSumInvestmentHelp" class="form-text text-muted">This is your initial investment amount.</small>
+                <span asp-validation-for="LumpSumInvestment" class="text-danger"></span>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
-                <label for="monthlyInvestment">Monthly Investment (£)</label>
-                <input type="number" class="form-control" id="monthlyInvestment" placeholder="e.g. 100">
+                <label asp-for="MonthlyInvestment"></label>
+                <input type="number" class="form-control" id="monthlyInvestment" placeholder="e.g. 100" asp-for="MonthlyInvestment">
                 <small id="monthlyInvestmentHelp" class="form-text text-muted">This is the amount you will continue to invest each month.</small>
+                <span asp-validation-for="MonthlyInvestment" class="text-danger"></span>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label for="targetValue">Target Value (£)</label>
-                <input type="number" class="form-control" id="targetValue" placeholder="e.g. 3000">
+                <label asp-for="TargetValue"></label>
+                <input type="number" class="form-control" id="targetValue" placeholder="e.g. 3000" asp-for="TargetValue">
                 <small id="targetValueHelp" class="form-text text-muted">This is the value you aim to reach at the end of the provided time scale.</small>
+                <span asp-validation-for="TargetValue" class="text-danger"></span>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
-                <label for="timeScale">Time Scale (years)</label>
-                <input type="number" class="form-control" id="timeScale" placeholder="e.g 10">
+                <label asp-for="TimeScale"></label>
+                <input type="number" class="form-control" id="timeScale" placeholder="e.g 10" asp-for="TimeScale">
                 <small id="timeScaleHelp" class="form-text text-muted">The time scale for your investment e.g 5 years.</small>
+                <span asp-validation-for="TimeScale" class="text-danger"></span>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label for="riskLevel">Accepted Risk Level</label>
-                <select class="form-control" id="riskLevel">
+                <label asp-for="RiskLevel"></label>
+                <select class="form-control" id="riskLevel" asp-for="RiskLevel">
                     <option>Low</option>
                     <option>Medium</option>
                     <option>High</option>
                 </select>
                 <small id="riskLevelHelp" class="form-text text-muted">The level of risk you are willing to accept. This will potentially impact your earnings.</small>
+                <span asp-validation-for="RiskLevel" class="text-danger"></span>
             </div>
         </div>
         <div class="col">

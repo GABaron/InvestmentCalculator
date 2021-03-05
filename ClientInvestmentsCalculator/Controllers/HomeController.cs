@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClientInvestmentsCalculator.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ClientInvestmentsCalculator.Controllers
 {
@@ -6,7 +7,7 @@ namespace ClientInvestmentsCalculator.Controllers
     {       
         public IActionResult Index()
         {
-            return View();
+            return View("Index", new InvestmentProjectionViewModel());
         }            
     }
 }
