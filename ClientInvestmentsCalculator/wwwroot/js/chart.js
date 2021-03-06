@@ -25,7 +25,7 @@
     };
 
     self.createDataTable = function (data) {
-        var dataTable = [['Year', 'Value']];
+        var dataTable = [['Year', 'Value'];
 
         $.each(data, function (fieldName, fieldProperties) {
             dataTable.push([fieldProperties.year, fieldProperties.balance]);
@@ -37,11 +37,19 @@
     self.drawChart = function (data) {
         var dataTable = self.createDataTable(data);
         var data = google.visualization.arrayToDataTable(dataTable);
+        //var currentYear = new Date().getFullYear();
+        ////var maxDateRange 
 
         var options = {
             title: 'Return on Investment Over Time',
             curveType: 'function',
-            legend: { position: 'bottom' }
+            legend: { position: 'bottom' },
+            vAxis: {                
+                minValue: 1000,
+            }//,
+            //hAxis: {
+            //    minValue: ,
+            //}
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

@@ -18,7 +18,7 @@ namespace Domain.InvestmentProjection
 
             Dictionary<int, decimal> yearlyProjectionFigures = new Dictionary<int, decimal>();
 
-            var currentBalance = investmentProjectionQuery.LumpSumInvestment;
+            var currentBalance = Math.Round(investmentProjectionQuery.LumpSumInvestment, 2, MidpointRounding.ToEven);
             var numberOfMonthsInTimeScale = GetNumberOfMonthsForTimeScale(investmentProjectionQuery.TimeScale);            
             var currentYear = 0;
 
@@ -28,16 +28,15 @@ namespace Domain.InvestmentProjection
                 {                    
                     yearlyProjectionFigures.Add(DateTime.Now.Year, currentBalance);
                     currentYear++;
-                }
-                else
-                {
-                    currentBalance += investmentProjectionQuery.MonthlyInvestment;
-                }
-
-                currentBalance += (interestRate / 100) * currentBalance;               
+                    continue;
+                }                                                
+                
+                currentBalance += (interestRate / 100) * currentBalance;                
+                currentBalance += Math.Round(investmentProjectionQuery.MonthlyInvestment, 2, MidpointRounding.ToEven);                
 
                 if (count != 0 && count % 12 == 0 || count == numberOfMonthsInTimeScale)
-                {                    
+                {
+                    currentBalance = Math.Round(currentBalance, 2, MidpointRounding.ToEven);
                     var yearForCalculation = DateTime.Now.AddYears(currentYear).Year;                                  
                     yearlyProjectionFigures.Add(yearForCalculation, currentBalance);
                     currentYear++;                    
