@@ -25,31 +25,33 @@
     };
 
     self.createDataTable = function (data) {
-        var dataTable = [['Year', 'Value']];
+        var dataTable = [];
 
         $.each(data, function (fieldName, fieldProperties) {
-            dataTable.push([fieldProperties.year, fieldProperties.balance]);
+            dataTable.push([new Date(fieldProperties.year, 0), fieldProperties.balance]);
         });
 
         return dataTable;
-    };
+    };    
 
     self.drawChart = function (data) {
-        var dataTable = self.createDataTable(data);
-        var data = google.visualization.arrayToDataTable(dataTable);
-        //var currentYear = new Date().getFullYear();
-        ////var maxDateRange 
-
+        var dataTable = self.createDataTable(data);       
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Year');
+        data.addColumn('number', 'Value (£)');    
+        data.addRows(dataTable)      
+       
         var options = {
             title: 'Return on Investment Over Time',
             curveType: 'function',
             legend: { position: 'bottom' },
             vAxis: {                
-                minValue: 1000,
-            }//,
-            //hAxis: {
-            //    minValue: ,
-            //}
+                minValue: $("#targetValue").val(),
+            },
+            hAxis: {
+                format: 'yyyy',
+                ticks: data.getDistinctValues(0)
+            }
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
