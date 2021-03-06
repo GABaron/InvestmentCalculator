@@ -25,7 +25,7 @@
     };
 
     self.createDataTable = function (data) {
-        var dataTable = [['Year', 'Value'];
+        var dataTable = [['Year', 'Value']];
 
         $.each(data, function (fieldName, fieldProperties) {
             dataTable.push([fieldProperties.year, fieldProperties.balance]);
