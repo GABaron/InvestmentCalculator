@@ -24,37 +24,53 @@
         });
     };
 
+    self.getEndYear = function () {
+        var timeScale = parseInt($("#timeScale").val());
+        var yearInvestmentEnds = new Date().getFullYear() + timeScale;       
+        return new Date(yearInvestmentEnds, 0)    
+    };
+
     self.createDataTable = function (data) {
         var dataTable = [];
+        var yearInvestmentEnds = self.getEndYear();
+        var targetValue = parseInt($("#targetValue").val());
 
-        $.each(data, function (fieldName, fieldProperties) {
-            dataTable.push([new Date(fieldProperties.year, 0), fieldProperties.balance]);
+        dataTable.push([yearInvestmentEnds, null, null, targetValue]);
+
+        $.each(data, function (fieldName, fieldProperties) {                 
+            dataTable.push([new Date(fieldProperties.year, 0), fieldProperties.balance, fieldProperties.totalAmountInvested, null]);
         });
-
+       
         return dataTable;
     };    
 
     self.drawChart = function (data) {
         var dataTable = self.createDataTable(data);       
         var data = new google.visualization.DataTable();
-        data.addColumn('date', 'Year');
-        data.addColumn('number', 'Value (£)');    
-        data.addRows(dataTable)      
+        data.addColumn("date", "Year");
+        data.addColumn("number", "Value (£)");            
+        data.addColumn("number", "Amount Invested (£)");       
+        data.addColumn("number", "Target Value (£)");
+        data.addRows(dataTable);       
        
         var options = {
-            title: 'Return on Investment Over Time',
-            curveType: 'function',
+            title: "Return on Investment Over Time",
+            curveType: "function",
             legend: { position: 'bottom' },
-            vAxis: {                
+            vAxis: { 
+                format: "currency",
+                title: "Value (£)",
                 minValue: $("#targetValue").val(),
             },
             hAxis: {
-                format: 'yyyy',
+                title: "Years",
+                format: "yyyy",
                 ticks: data.getDistinctValues(0)
-            }
+            },
+            pointSize: 5
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        var chart = new google.visualization.LineChart(document.getElementById("curve_chart"));
 
         chart.draw(data, options);
     }    
@@ -70,6 +86,6 @@
         });
     };
 
-    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.load("current", { "packages": ["corechart"], "language": "en-GB" });
     google.charts.setOnLoadCallback(self.initialise);
 });

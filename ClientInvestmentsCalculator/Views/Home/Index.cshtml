@@ -15,7 +15,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="LumpSumInvestment"></label>
-                <input type="number" class="form-control" id="lumpSumInvestment" placeholder="e.g. 1000" asp-for="LumpSumInvestment">
+                <input type="number" step='0.01' min="1" class="form-control" id="lumpSumInvestment" placeholder="e.g. 1000" asp-for="LumpSumInvestment">
                 <small id="lumpSumInvestmentHelp" class="form-text text-muted">This is your initial investment amount.</small>
                 <span asp-validation-for="LumpSumInvestment" class="text-danger"></span>
             </div>
@@ -23,7 +23,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="MonthlyInvestment"></label>
-                <input type="number" class="form-control" id="monthlyInvestment" placeholder="e.g. 100" asp-for="MonthlyInvestment">
+                <input type="number" step='0.01' min="1" class="form-control" id="monthlyInvestment" placeholder="e.g. 100" asp-for="MonthlyInvestment">
                 <small id="monthlyInvestmentHelp" class="form-text text-muted">This is the amount you will continue to invest each month.</small>
                 <span asp-validation-for="MonthlyInvestment" class="text-danger"></span>
             </div>
@@ -33,7 +33,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="TargetValue"></label>
-                <input type="number" class="form-control" id="targetValue" placeholder="e.g. 3000" asp-for="TargetValue">
+                <input type="number" step='0.01' min="1" class="form-control" id="targetValue" placeholder="e.g. 3000" asp-for="TargetValue">
                 <small id="targetValueHelp" class="form-text text-muted">This is the value you aim to reach at the end of the provided time scale.</small>
                 <span asp-validation-for="TargetValue" class="text-danger"></span>
             </div>
@@ -41,7 +41,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="TimeScale"></label>
-                <input type="number" class="form-control" id="timeScale" placeholder="e.g 10" asp-for="TimeScale">
+                <input type="number" min="1" class="form-control" id="timeScale" placeholder="e.g 10" asp-for="TimeScale">
                 <small id="timeScaleHelp" class="form-text text-muted">The time scale for your investment e.g 5 years.</small>
                 <span asp-validation-for="TimeScale" class="text-danger"></span>
             </div>

@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace ClientInvestmentsCalculator.Models
-{ 
+{
     public class InvestmentProjectionViewModel
     {
-        [Required]
+        [Required]       
         [DisplayName("Lump Sum Investment (£)")]
         public decimal LumpSumInvestment { get; set; }
 

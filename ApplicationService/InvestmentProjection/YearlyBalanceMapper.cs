@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Domain.InvestmentProjection;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ApplicationService.InvestmentProjection
 {
     public static class YearlyBalanceMapper
     {
-        public static List<YearlyBalance> Map(Dictionary<int, decimal> yearlyBalances)
-        {
-            List<YearlyBalance> yearlyBalanceList = new List<YearlyBalance>();
-
-            foreach (KeyValuePair<int, decimal> yearlyBalance in yearlyBalances)
-            {
-                yearlyBalanceList.Add(new YearlyBalance(yearlyBalance.Key, yearlyBalance.Value));
-            }
-
-            return yearlyBalanceList;
+        public static IEnumerable<YearlyBalance> Map(IEnumerable<DomainYearlyBalance> yearlyBalances)
+        {           
+            return yearlyBalances.Select(x => new YearlyBalance(x.Year, x.Balance, x.TotalAmountInvested));                      
         }
     }
 }
