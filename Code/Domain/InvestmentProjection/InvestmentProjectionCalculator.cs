@@ -49,26 +49,17 @@ namespace Domain.InvestmentProjection
             return yearlyProjectionFigures;
         }     
         
-        private decimal GetInterestRate(string riskLevel)
+    private decimal GetInterestRate(string riskLevel)
         {
             var riskLevelUpperCase = riskLevel.ToUpper();
 
-            if (riskLevelUpperCase == LowRisk)
+            return riskLevelUpperCase switch
             {
-                return LowRiskPercentage;
-            }
-
-            if (riskLevelUpperCase == MediumRisk)
-            {
-                return MediumRiskPercentage;
-            }
-
-            if (riskLevelUpperCase == HighRisk)
-            {
-                return HighRiskPercentage;
-            }
-
-            throw new Exception("Could not calculate risk level. Operaton aborted.");
+                LowRisk => LowRiskPercentage,
+                MediumRisk => MediumRiskPercentage,
+                HighRisk => HighRiskPercentage,
+                _ => throw new Exception("Could not calculate risk level. Operation aborted.")
+            };
         }
 
         private int GetNumberOfMonthsForTimeScale(int years)
