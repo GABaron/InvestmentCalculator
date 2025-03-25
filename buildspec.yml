@@ -8,6 +8,7 @@ phases:
       - dotnet restore Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj
   build:
     commands:
+      - dotnet --list-sdks
       - dotnet publish Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj -c Release -o .
       - ls .
 artifacts:
