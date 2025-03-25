@@ -6,6 +6,9 @@ phases:
       dotnet: 8.0
     commands:
       - dotnet restore Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj
+  pre_build:
+    commands:
+      - mkdir -p ./publish
   build:
     commands:
       - dotnet publish Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj -c Release -o ./publish
