@@ -7,6 +7,7 @@ phases:
   build:
     commands:
       - dotnet publish Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj -c Release -o ./publish
+      - ls ./publish
 artifacts:
   files:
     - '**/*'
