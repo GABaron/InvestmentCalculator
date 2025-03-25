@@ -10,5 +10,5 @@ phases:
       - ls ./publish
 artifacts:
   files:
-    - '**/*'
+    - '*'
   base-directory: ./publish
