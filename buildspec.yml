@@ -4,6 +4,8 @@ phases:
   install:
     runtime-versions:
       dotnet: 8.0
+    commands:
+      - dotnet restore Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj
   build:
     commands:
       - dotnet publish Code/ClientInvestmentsCalculator/ClientInvestmentsCalculator.csproj -c Release -o ./publish
@@ -11,4 +13,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: publish
+  base-directory: ./publish
